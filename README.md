@@ -30,6 +30,7 @@ Visitors can:
   ssh -i "key-example.pem" ubuntu@3.86.200.129
 
 Installed essential tools:
+
 sudo apt update
 sudo apt install nodejs npm nginx
 sudo npm install -g pm2
@@ -48,6 +49,7 @@ Log messages to messages.log
 Designed a clean UI using Tailwind via CDN in public/index.html
 
 Example route:
+
 app.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
   const log = `[${new Date().toISOString()}] Name: ${name}, Email: ${email}\nMessage: ${message}\n\n`;
@@ -59,6 +61,7 @@ app.post('/contact', (req, res) => {
 Configured Nginx to reverse proxy traffic from port 80 to Node.js (port 3000).
 
 Snippet from /etc/nginx/sites-enabled/default:
+
 server {
     listen 80;
     server_name _;
@@ -75,11 +78,15 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
+
+
 Reloaded Nginx:
+
 sudo systemctl restart nginx
 
 4. Running the App with PM2
 Used PM2 to manage the Node.js process:
+
 pm2 start index.js --name index
 pm2 save
 
@@ -91,7 +98,9 @@ Server logs messages both to:
 Console (viewable with pm2 logs index)
 
 messages.log on disk
+
 Example message:
+
 [2025-06-15T12:03:45Z] Name: John Doe, Email: john@example.com
 Message: Hello! Great pitch.
 
