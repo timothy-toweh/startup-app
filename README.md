@@ -30,7 +30,7 @@ Visitors can:
   ssh -i "key-example.pem" ubuntu@3.86.200.129
 Installed essential tools:
 
-bash
+```bash
 
 sudo apt update
 sudo apt install nodejs npm nginx
@@ -51,7 +51,7 @@ Designed a clean UI using Tailwind via CDN in public/index.html
 
 Example route:
 
-js
+```js
 
 app.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
@@ -66,7 +66,7 @@ Configured Nginx to reverse proxy traffic from port 80 to Node.js (port 3000).
 
 Snippet from /etc/nginx/sites-enabled/default:
 
-nginx
+```nginx
 
 server {
     listen 80;
@@ -86,7 +86,7 @@ server {
 }
 Reloaded Nginx:
 
-bash
+```bash
 
 sudo systemctl restart nginx
 
@@ -94,7 +94,7 @@ sudo systemctl restart nginx
 ⚙️ 4. Running the App with PM2
 Used PM2 to manage the Node.js process:
 
-bash
+```bash
 
 pm2 start index.js --name index
 pm2 save
