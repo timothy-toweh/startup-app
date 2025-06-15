@@ -31,8 +31,7 @@ Visitors can:
 Installed essential tools:
 
 bash
-Copy
-Edit
+
 sudo apt update
 sudo apt install nodejs npm nginx
 sudo npm install -g pm2
@@ -53,8 +52,7 @@ Designed a clean UI using Tailwind via CDN in public/index.html
 Example route:
 
 js
-Copy
-Edit
+
 app.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
   const log = `[${new Date().toISOString()}] Name: ${name}, Email: ${email}\nMessage: ${message}\n\n`;
@@ -69,8 +67,7 @@ Configured Nginx to reverse proxy traffic from port 80 to Node.js (port 3000).
 Snippet from /etc/nginx/sites-enabled/default:
 
 nginx
-Copy
-Edit
+
 server {
     listen 80;
     server_name _;
@@ -90,8 +87,7 @@ server {
 Reloaded Nginx:
 
 bash
-Copy
-Edit
+
 sudo systemctl restart nginx
 
 
@@ -99,8 +95,7 @@ sudo systemctl restart nginx
 Used PM2 to manage the Node.js process:
 
 bash
-Copy
-Edit
+
 pm2 start index.js --name index
 pm2 save
 
@@ -117,8 +112,7 @@ messages.log on disk
 Example message:
 
 yaml
-Copy
-Edit
+
 [2025-06-15T12:03:45Z] Name: John Doe, Email: john@example.com
 Message: Hello! Great pitch.
 
