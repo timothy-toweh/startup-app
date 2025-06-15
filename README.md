@@ -1,58 +1,76 @@
 # 🌱 GreenRoute CloudOps – DevOps Pitch Page
 
-## 🌐 Live Demo
-Access the hosted project here:  
-**http://3.86.200.129/**
+## 🌐 Live Demo  
+**[http://3.86.200.129/](http://3.86.200.129/)**
 
-## 📸 Screenshot
-
+## 📸 Screenshot  
 ![Rendered Page](./screenshot.png)
+
+---
 
 ## 🧩 Project Overview
 
-GreenRoute CloudOps is a cloud-native pitch page showcasing how AI, DevOps, and sustainable logistics can intersect. This simple Node.js app serves a responsive HTML page styled with TailwindCSS, and includes a functional contact form.
+**GreenRoute CloudOps** is a cloud-native pitch page that showcases how **AI, DevOps**, and **sustainable logistics** can intersect.
 
-Visitors can learn about the vision, background, and skills of Timothy Oluwatoba Toweh, and submit messages directly through the page.
+Built with **Node.js** and styled using **TailwindCSS**, it features a responsive UI and a functional contact form that logs user-submitted messages.
+
+Visitors can:
+- Learn about the vision and background of **Timothy Oluwatoba Toweh**
+- Discover skills and projects
+- Submit messages via the web form
 
 ---
 
 ## 🚀 Deployment Process
 
-### 🔧 1. Cloud Server Setup
-
-- **Platform:** Amazon EC2 (Ubuntu 22.04)
-- **Accessed via SSH:**  
+ 🔧 1. Cloud Server Setup
+- **Platform:** Amazon EC2 (Ubuntu 22.04)  
+- **Accessed via SSH:**
   ```bash
   ssh -i "key-example.pem" ubuntu@3.86.200.129
-
 Installed essential tools:
+
+bash
+Copy
+Edit
 sudo apt update
 sudo apt install nodejs npm nginx
 sudo npm install -g pm2
 
-🛠️  2. Application Setup
-Created a project directory startup-app
+🛠️ 2. Application Setup
+Created a project directory: startup-app
 
-Wrote index.js to:
+Developed index.js to:
 
 Serve static HTML from the /public folder
 
-Handle POST requests from the contact form
+Handle POST /contact form submissions
 
 Log messages to messages.log
 
-Set up the HTML page in public/index.html with TailwindCSS via CDN
+Designed a clean UI using Tailwind via CDN in public/index.html
 
 Example route:
+
+js
+Copy
+Edit
 app.post('/contact', (req, res) => {
   const { name, email, message } = req.body;
-  // Logs message to a file
+  const log = `[${new Date().toISOString()}] Name: ${name}, Email: ${email}\nMessage: ${message}\n\n`;
+  fs.appendFileSync('messages.log', log);
+  res.send('Message received!');
 });
 
-🌐 3. Web Server Configuration (Nginx)
-Used Nginx as a reverse proxy to route HTTP requests on port 80 to the Node.js app running on port 3000.
 
-Config snippet in /etc/nginx/sites-enabled/default:
+🌐 3. Web Server Configuration (Nginx)
+Configured Nginx to reverse proxy traffic from port 80 to Node.js (port 3000).
+
+Snippet from /etc/nginx/sites-enabled/default:
+
+nginx
+Copy
+Edit
 server {
     listen 80;
     server_name _;
@@ -69,33 +87,43 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
-
-
 Reloaded Nginx:
+
+bash
+Copy
+Edit
 sudo systemctl restart nginx
 
-⚙️  4. Running the App with PM2
-Started the Node.js server with PM2:
+
+⚙️ 4. Running the App with PM2
+Used PM2 to manage the Node.js process:
+
+bash
+Copy
+Edit
 pm2 start index.js --name index
 pm2 save
 
+
 📥 5. Contact Form Functionality
-HTML form sends a POST request to /contact
+HTML form submits a POST request to /contact
 
-Server logs each message to:
+Server logs messages both to:
 
-Console logs (seen via pm2 logs index)
+Console (viewable with pm2 logs index)
 
-A messages.log file on the server
+messages.log on disk
 
 Example message:
+
+yaml
+Copy
+Edit
 [2025-06-15T12:03:45Z] Name: John Doe, Email: john@example.com
 Message: Hello! Great pitch.
-
 
 
 ✨ Author
 Timothy Oluwatoba Toweh
 Junior Cloud Engineer
 Passionate about cloud infrastructure, green technology, and intelligent logistics systems.
-
